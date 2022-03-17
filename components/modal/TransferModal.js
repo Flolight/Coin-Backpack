@@ -3,8 +3,13 @@ import Modal from 'react-modal/lib/components/Modal';
 import styled from 'styled-components';
 import Transfer from './Transfer';
 
-const TransferModal = () => {
-    const [action, setAction] = React.useState('send');
+const TransferModal = ({
+    sanityTokens,
+    thirdWebTokens,
+    walletAddress
+    }) => {
+    const [action, setAction] = useState('send');
+    const [selectedCoin, setSelectedCoin] = useState(sanityTokens[0]);
 
     const selectedStyle = {
         color: '#F6AF48',
@@ -16,7 +21,12 @@ const TransferModal = () => {
     const  selectedModel = (options) => {
         switch(options){
             case 'send':
-                return <Transfer />
+                return <Transfer
+                            selectedCoin={selectedCoin}
+                            setAction={setAction}
+                            thirdWebTokens={thirdWebTokens}
+                            walletAddress={walletAddress}
+                        />
             case 'receive':
                 return <h2>Receive</h2>
             case 'buy':
